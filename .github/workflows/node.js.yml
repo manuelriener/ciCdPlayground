@@ -1,0 +1,40 @@
+name: Node.js CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Run unit tests
+        run: yarn test
+
+      - name: Run integration tests
+        run: yarn test:e2e
+
+      - name: Report JUnit test results
+        uses: actions/junit-report@v2
+        with:
+          test_results: reports/**/*.xml
