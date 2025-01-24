@@ -11,22 +11,23 @@ pipeline {
             }
         }
 
-        stage('build') {
-            steps {
-                sh 'yarn build'
-            }
-        }
-
         stage('test') {
             steps {
                 sh 'yarn test'
+            }
+            post {
+                always {
+                    junit '**/reports/**/*.xml'
+                }
             }
         }
 
         stage('e2e test') {
             steps {
-                sh 'yarn test:e2e
-'
+                sh 'yarn build'
+            }
+            steps {
+                sh 'yarn test:e2e'
             }
         }
 
