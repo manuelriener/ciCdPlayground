@@ -37,4 +37,4 @@ jobs:
       - name: Report JUnit test results
         uses: actions/junit-report@v2
         with:
-          test_results: reports/**/*.xml
+          test_results: **/reports/**/*.xml
