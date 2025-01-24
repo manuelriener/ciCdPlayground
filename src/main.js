@@ -11,7 +11,7 @@ new App({
     // What do you associate with the term 'CI/CD'?
     associations: ["Continuous integration, continuous delivery"],
     // Which CI/CD tools do you use in your project?
-    tools: "None yet",
+    tools: "None",
     // What do you want to learn in this workshop?
     expectations: ["Basics about CI/CD, Jenkins"],
   },
