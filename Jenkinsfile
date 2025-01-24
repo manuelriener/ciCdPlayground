@@ -1,34 +1,31 @@
 pipeline {
     agent any
+
     tools {
         nodejs 'yarn'
     }
 
     stages {
-        stage('install') {
+        stage('Checkout') {
             steps {
-                sh 'yarn'
+                sh 'yarn install'
             }
         }
-
-        stage('test') {
+        stage('Unit tests') {
             steps {
                 sh 'yarn test'
             }
-            post {
-                always {
-                    junit '**/reports/**/*.xml'
-                }
-            }
         }
-
-        stage('e2e test') {
+        stage('Integration tests') {
             steps {
                 sh 'yarn build'
                 sh 'yarn test:e2e'
             }
         }
-
     }
-
+    post {
+        always {
+            junit '**/reports/**/*.xml'
+        }
+    }
 }
