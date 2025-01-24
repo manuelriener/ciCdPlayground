@@ -25,10 +25,11 @@ pipeline {
 
         stage('e2e test') {
             steps {
-                sh 'yarn test:e2e'
+                sh 'yarn test:e2e
+'
             }
         }
 
-
     }
+
 }
